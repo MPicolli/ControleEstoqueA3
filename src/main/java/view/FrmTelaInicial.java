@@ -4,10 +4,6 @@
  */
 package view;
 
-/**
- *
- * @author Dell
- */
 public class FrmTelaInicial extends javax.swing.JFrame {
 
     /**

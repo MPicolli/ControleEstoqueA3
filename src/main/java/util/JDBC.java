@@ -4,10 +4,6 @@
  */
 package util;
 
-/**
- *
- * @author Dell
- */
 public class JDBC {
     
 }

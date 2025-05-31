@@ -4,10 +4,6 @@
  */
 package exception;
 
-/**
- *
- * @author Dell
- */
 public class CustomException {
     
 }

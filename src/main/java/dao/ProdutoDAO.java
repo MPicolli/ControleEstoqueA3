@@ -4,10 +4,6 @@
  */
 package dao;
 
-/**
- *
- * @author Dell
- */
 public class ProdutoDAO {
     
 }
