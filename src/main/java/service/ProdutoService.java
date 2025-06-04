@@ -4,10 +4,6 @@
  */
 package service;
 
-/**
- *
- * @author Dell
- */
 public class ProdutoService {
     
 }
