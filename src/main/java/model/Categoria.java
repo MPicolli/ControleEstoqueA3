@@ -1,7 +1,6 @@
 package model;
 
 public class Categoria {
-    
     private int id;
     private String nome;
     private TamanhoProduto tamanhoProduto;
@@ -44,5 +43,4 @@ public class Categoria {
     public void setTipoEmbalagem(TipoEmbalagem tipoEmbalagem) {
         this.tipoEmbalagem = tipoEmbalagem;
     }
-
 }

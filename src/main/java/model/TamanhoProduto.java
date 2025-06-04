@@ -19,5 +19,4 @@ public enum TamanhoProduto {
     public String toString() {
         return this.descricao;
     }
-    
 }

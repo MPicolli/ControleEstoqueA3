@@ -19,5 +19,4 @@ public enum TipoEmbalagem {
     public String toString() {
         return this.descricao;
     }
-
 }
