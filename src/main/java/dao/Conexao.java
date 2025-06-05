@@ -11,7 +11,6 @@ public class Conexao {
 
     static Connection getConnection() {
         try {
-            // Carrega o driver JDBC do MySQL (necessário para versões antigas do Java)
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USUARIO, SENHA);
         } catch (ClassNotFoundException e) {
