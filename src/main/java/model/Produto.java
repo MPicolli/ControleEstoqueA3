@@ -2,8 +2,8 @@ package model;
 
 public class Produto {
 
-    private int id;
-    private String nome;
+    private int idProduto;
+    private String nomeProduto;
     private double preco;
     private UnidadeMedida unidadeMedida;
     private Categoria categoria;
@@ -11,8 +11,12 @@ public class Produto {
     private int quantidadeMinima;
     private int quantidadeMaxima;
 
-    public Produto(String nome, double preco, UnidadeMedida unidadeMedida, Categoria categoria, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima) {
-        this.nome = nome;
+    public Produto() {
+
+    }
+
+    public Produto(String nomeProduto, double preco, UnidadeMedida unidadeMedida, Categoria categoria, int quantidadeEstoque, int quantidadeMinima, int quantidadeMaxima) {
+        this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.unidadeMedida = unidadeMedida;
         this.categoria = categoria;
@@ -21,20 +25,20 @@ public class Produto {
         this.quantidadeMaxima = quantidadeMaxima;
     }
 
-    public int getId() {
-        return id;
+    public int getIdProduto() {
+        return idProduto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
     public double getPreco() {

@@ -26,10 +26,9 @@ CREATE TABLE tb_produto (
 CREATE TABLE tb_movimentacao_estoque (
     id_movimentacao INT NOT NULL AUTO_INCREMENT,
     id_produto INT NOT NULL,
-    tipo_movimentacao VARCHAR(50) NOT NULL, -- Ex: Entrada de Compra, Saida de Venda;
+    tipo_movimentacao ENUM('ENTRADA', 'SAIDA') NOT NULL,
     data_movimentacao DATE NOT NULL,
     observacoes VARCHAR(250),
     PRIMARY KEY (id_movimentacao),
     CONSTRAINT fk_id_produto FOREIGN KEY (id_produto) REFERENCES tb_produto(id_produto)
-    ENGINE = InnoDB;
-)
+) ENGINE = InnoDB;

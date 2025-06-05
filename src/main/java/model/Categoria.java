@@ -1,31 +1,36 @@
 package model;
 
 public class Categoria {
-    private int id;
-    private String nome;
+    private int idCategoria;
+    private String nomeCategoria;
     private TamanhoProduto tamanhoProduto;
     private TipoEmbalagem tipoEmbalagem;
+    
+    public Categoria() {
+        
+    }
 
-    public Categoria(String nome, TamanhoProduto tamanhoProduto, TipoEmbalagem tipoEmbalagem) {
-        this.nome = nome;
+    public Categoria(String nomeCategoria, TamanhoProduto tamanhoProduto, TipoEmbalagem tipoEmbalagem) {
+        this.nomeCategoria = nomeCategoria;
         this.tamanhoProduto = tamanhoProduto;
         this.tipoEmbalagem = tipoEmbalagem;
     }
 
-    public int getId() {
-        return id;
+
+    public int getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public TamanhoProduto getTamanhoProduto() {
