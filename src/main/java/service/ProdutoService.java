@@ -1,12 +1,13 @@
 package service;
 
 import java.util.List;
+
 import dao.ProdutoDAO;
 import model.Produto;
 
 public class ProdutoService {
 
-    private ProdutoDAO produtoDAO;
+    private final ProdutoDAO produtoDAO;
 
     public ProdutoService() {
         produtoDAO = new ProdutoDAO();
