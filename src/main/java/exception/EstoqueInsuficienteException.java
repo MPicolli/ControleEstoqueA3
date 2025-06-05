@@ -1,5 +1,12 @@
 package exception;
 
-public class EstoqueInsuficienteException {
-    
+public class EstoqueInsuficienteException extends RuntimeException {
+
+    public EstoqueInsuficienteException(String message) {
+        super(message);
+    }
+
+    public EstoqueInsuficienteException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
