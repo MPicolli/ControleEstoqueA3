@@ -5,42 +5,50 @@ import dao.ProdutoDAO;
 import model.Produto;
 
 public class ProdutoService {
+
     private ProdutoDAO produtoDAO;
 
     public ProdutoService() {
         produtoDAO = new ProdutoDAO();
     }
 
-    public boolean cadastrarProduto(Produto produto) {
-        if (produto != null && produto.getNome() != null && !produto.getNome().isEmpty()) {
-        return produtoDAO.inserir(produto);
+    public void cadastrarProduto(Produto produto) {
+        if (produto != null && produto.getNomeProduto() != null && !produto.getNomeProduto().isEmpty()) {
+            produtoDAO.inserir(produto);
+        } else {
+            throw new IllegalArgumentException("Produto inválido para cadastro.");
         }
-        return false;
     }
 
-    public boolean atualizarProduto(Produto produto) {
-        if (produto != null && produto.getId() > 0) {
-            return produtoDAO.atualizar(produto);
+    public void atualizarProduto(Produto produto) {
+        if (produto != null && produto.getIdProduto() > 0) {
+            produtoDAO.atualizar(produto);
+        } else {
+            throw new IllegalArgumentException("Produto inválido para atualização.");
         }
-        return false;
     }
 
-    public boolean excluirProduto(int id) {
+    public void excluirProduto(int id) {
         if (id > 0) {
-            return produtoDAO.excluir(id);
+            produtoDAO.deletar(id);
+        } else {
+            throw new IllegalArgumentException("ID inválido para exclusão.");
         }
-        return false;
     }
 
     public List<Produto> listarProdutos() {
-        return produtoDAO.buscarTodosProdutos();
+        return produtoDAO.listarTodos();
     }
 
     public Produto buscarPorId(int id) {
-        return produtoDAO.buscarPorId(id);
+        if (id > 0) {
+            return produtoDAO.buscarPorId(id);
+        }
+        return null;
     }
 
     public void reajustarPreco(double percentual) {
+        if (percentual == 0) return;
         List<Produto> produtos = listarProdutos();
         for (Produto produto : produtos) {
             double novoPreco = produto.getPreco() * (1 + percentual / 100);
@@ -57,16 +65,17 @@ public class ProdutoService {
         return produto.getQuantidadeEstoque() > produto.getQuantidadeMaxima();
     }
 
-    public boolean movimentarEstoque(int idProduto, int quantidade, boolean entrada) {
+    public void movimentarEstoque(int idProduto, int quantidade, boolean entrada) {
         Produto produto = buscarPorId(idProduto);
-        if (produto == null)
-            return false;
+        if (produto == null) {
+            throw new IllegalArgumentException("Produto não encontrado para movimentação.");
+        }
 
         int novaQuantidade = entrada
                 ? produto.getQuantidadeEstoque() + quantidade
                 : produto.getQuantidadeEstoque() - quantidade;
 
         produto.setQuantidadeEstoque(novaQuantidade);
-        return atualizarProduto(produto);
+        atualizarProduto(produto);
     }
 }
