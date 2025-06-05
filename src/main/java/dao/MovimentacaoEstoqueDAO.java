@@ -1,12 +1,17 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; // Adicionar importação se não estiver presente
 
 import exception.DatabaseException;
 import model.MovimentacaoEstoque;
 import model.Produto;
+import model.TipoMovimentacao;
 
 public class MovimentacaoEstoqueDAO {
 
@@ -42,7 +47,11 @@ public class MovimentacaoEstoqueDAO {
                 p.setIdProduto(rs.getInt("id_produto"));
                 mov.setProduto(p);
 
-                mov.setTipoMovimentacao(rs.getString("tipo_movimentacao"));
+                String tipoMovimentacaoStr = rs.getString("tipo_movimentacao");
+                if (tipoMovimentacaoStr != null) {
+                    mov.setTipoMovimentacao(TipoMovimentacao.valueOf(tipoMovimentacaoStr.toUpperCase()));
+                }
+
                 mov.setDataMovimentacao(rs.getDate("data_movimentacao").toLocalDate());
                 mov.setObservacoes(rs.getString("observacoes"));
 

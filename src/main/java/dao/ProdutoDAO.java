@@ -14,7 +14,6 @@ import model.Produto;
 import model.UnidadeMedida;
 
 public class ProdutoDAO {
-
     private static final String TB_PRODUTO = "tb_produto";
     private static final String ID_PRODUTO = "id_produto";
     private static final String NOME = "nome";
@@ -36,7 +35,6 @@ public class ProdutoDAO {
 
         try (Connection conexao = Conexao.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)) {
-
             stmt.setString(1, produto.getNomeProduto());
             stmt.setDouble(2, produto.getPreco());
 
@@ -44,13 +42,14 @@ public class ProdutoDAO {
                 throw new DatabaseException(
                         "A unidade de medida do produto não pode ser nula, pois é um campo obrigatório.");
             }
+
             stmt.setString(3, produto.getUnidadeMedida().toString());
 
             if (produto.getCategoria() == null || produto.getCategoria().getIdCategoria() <= 0) {
                 throw new DatabaseException("A categoria do produto é inválida ou não foi definida.");
             }
-            stmt.setInt(4, produto.getCategoria().getIdCategoria());
 
+            stmt.setInt(4, produto.getCategoria().getIdCategoria());
             stmt.setInt(5, produto.getQuantidadeEstoque());
             stmt.setInt(6, produto.getQuantidadeMinima());
             stmt.setInt(7, produto.getQuantidadeMaxima());
