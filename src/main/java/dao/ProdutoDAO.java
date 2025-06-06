@@ -33,7 +33,7 @@ public class ProdutoDAO {
                 TB_PRODUTO, NOME, PRECO, UNIDADE_MEDIDA, ID_CATEGORIA,
                 QTD_ESTOQUE, QTD_MINIMA, QTD_MAXIMA);
 
-        try (Connection conexao = Conexao.getConnection();
+        try (Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, produto.getNomeProduto());
             stmt.setDouble(2, produto.getPreco());
@@ -66,7 +66,7 @@ public class ProdutoDAO {
                 TB_PRODUTO, NOME, PRECO, UNIDADE_MEDIDA, ID_CATEGORIA,
                 QTD_ESTOQUE, QTD_MINIMA, QTD_MAXIMA, ID_PRODUTO);
 
-        try (Connection conexao = Conexao.getConnection();
+        try (Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNomeProduto());
@@ -97,7 +97,7 @@ public class ProdutoDAO {
     public void deletar(int idProduto) {
         String sql = String.format("DELETE FROM %s WHERE %s = ?", TB_PRODUTO, ID_PRODUTO);
 
-        try (Connection conexao = Conexao.getConnection();
+        try (Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
             stmt.setInt(1, idProduto);
@@ -112,7 +112,7 @@ public class ProdutoDAO {
         String sql = String.format("SELECT * FROM %s WHERE %s = ?", TB_PRODUTO, ID_PRODUTO);
         Produto produtoEncontrado = null;
 
-        try (Connection conexao = Conexao.getConnection();
+        try (Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
             stmt.setInt(1, idProduto);
@@ -131,7 +131,7 @@ public class ProdutoDAO {
         List<Produto> listaProdutos = new ArrayList<>();
         String sql = String.format("SELECT * FROM %s", TB_PRODUTO);
 
-        try (Connection conexao = Conexao.getConnection();
+        try (Connection conexao = ConnectionFactory.getConnection();
                 Statement stmt = conexao.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
 
