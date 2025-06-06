@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List; // Adicionar importação se não estiver presente
+import java.util.List;
 
 import exception.DatabaseException;
 import model.MovimentacaoEstoque;
@@ -38,12 +37,10 @@ public class MovimentacaoEstoqueDAO {
     public List<MovimentacaoEstoque> listarTodos() {
         List<MovimentacaoEstoque> lista = new ArrayList<>();
         String sql = "SELECT * FROM tb_movimentacao_estoque";
-        try (Statement stmt = conexao.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 MovimentacaoEstoque mov = new MovimentacaoEstoque();
-                mov.setIdMovimentacao(rs.getInt("id_movimentacao"));
-
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("id_produto"));
                 mov.setProduto(p);
