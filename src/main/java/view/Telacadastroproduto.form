@@ -25,10 +25,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -68,11 +65,11 @@
                                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                       <Component id="jvnome" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jvunidade" min="-2" pref="106" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jvunidade" min="-2" pref="112" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jvpreco" min="-2" pref="120" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jvcategoria" min="-2" pref="103" max="-2" attributes="0"/>
@@ -80,11 +77,10 @@
                                           <Component id="jvmax" min="-2" pref="106" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -130,12 +126,12 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jvnome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jvunidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jvpreco" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jvcategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jvmax" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jvmin" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jquant" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jvunidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="85" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -185,11 +181,6 @@
         <Component class="javax.swing.JTextField" name="jvnome">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jvnomeActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jvunidade">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jvunidadeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jvcategoria">
@@ -246,6 +237,24 @@
             <Property name="text" type="java.lang.String" value="ESTOQUE "/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JComboBox" name="jvunidade">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Unidade"/>
+                <StringItem index="1" value="Quilograma"/>
+                <StringItem index="2" value="Litro"/>
+                <StringItem index="3" value="Caixa"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jvunidadeActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -258,18 +267,24 @@
         <Component class="javax.swing.JTable" name="jvproduto">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
+              <Table columnCount="8" rowCount="0">
+                <Column editable="false" title="Id" type="java.lang.Object"/>
                 <Column editable="false" title="Nome" type="java.lang.Object"/>
                 <Column editable="false" title="Unidade" type="java.lang.Object"/>
                 <Column editable="false" title="Pre&#xe7;o" type="java.lang.Object"/>
                 <Column editable="false" title="Categoria" type="java.lang.Object"/>
-                <Column editable="true" title="Quantidade Maxima" type="java.lang.Object"/>
-                <Column editable="true" title="Quantidade Minima" type="java.lang.Object"/>
-                <Column editable="true" title="Quantidade" type="java.lang.Object"/>
+                <Column editable="false" title="Quantidade Maxima" type="java.lang.Object"/>
+                <Column editable="false" title="Quantidade Minima" type="java.lang.Object"/>
+                <Column editable="false" title="Quantidade" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

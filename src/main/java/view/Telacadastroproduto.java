@@ -4,7 +4,13 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Categoria;
+import model.Produto;
+import model.UnidadeMedida;
+import service.ProdutoService;
+//import service.CategoriaService;
 
 /**
  *
@@ -13,12 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class Telacadastroproduto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Telacadastroproduto.class.getName());
-
+    private ProdutoService produtoService;
     /**
      * Creates new form Telacadastroproduto
      */
     public Telacadastroproduto() {
         initComponents();
+        produtoService = new ProdutoService(); 
+        
     }
 
     /**
@@ -36,7 +44,6 @@ public class Telacadastroproduto extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jvnome = new javax.swing.JTextField();
-        jvunidade = new javax.swing.JTextField();
         jvcategoria = new javax.swing.JTextField();
         jvpreco = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -49,6 +56,7 @@ public class Telacadastroproduto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jquant = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jvunidade = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jvproduto = new javax.swing.JTable();
 
@@ -89,12 +97,6 @@ public class Telacadastroproduto extends javax.swing.JFrame {
             }
         });
 
-        jvunidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jvunidadeActionPerformed(evt);
-            }
-        });
-
         jvpreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jvprecoActionPerformed(evt);
@@ -127,6 +129,13 @@ public class Telacadastroproduto extends javax.swing.JFrame {
 
         jLabel7.setText("ESTOQUE ");
 
+        jvunidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidade", "Quilograma", "Litro", "Caixa" }));
+        jvunidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jvunidadeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,22 +159,21 @@ public class Telacadastroproduto extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton1)
                                     .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jvunidade, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jvunidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jvpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jvcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jvmax, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(96, 96, 96)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jButton2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton3)
-                                        .addGap(70, 70, 70)))))
+                                        .addGap(28, 28, 28)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -198,12 +206,12 @@ public class Telacadastroproduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jvunidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jvpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jvcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jvmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jvmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jquant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jquant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jvunidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -218,11 +226,11 @@ public class Telacadastroproduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Unidade", "Preço", "Categoria", "Quantidade Maxima", "Quantidade Minima", "Quantidade"
+                "Id", "Nome", "Unidade", "Preço", "Categoria", "Quantidade Maxima", "Quantidade Minima", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -241,9 +249,7 @@ public class Telacadastroproduto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,9 +270,9 @@ public class Telacadastroproduto extends javax.swing.JFrame {
         // TODO add your handling code here:
 DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
           String nome = jvnome.getText();
-    String unidade = jvunidade.getText(); 
+    String unidade = (String)jvunidade.getSelectedItem();
     String precoStr = jvpreco.getText();     
-    String categoria = jvcategoria.getText();
+    String categoriaStr = jvcategoria.getText();
     String qntmaxStr = jvmax.getText();
     String qntminStr = jvmin.getText();
     String qntStr = jquant.getText();
@@ -277,14 +283,34 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
         int qntmax = Integer.parseInt(qntmaxStr);
         int qntmin = Integer.parseInt(qntminStr);
        
-        Object[] dados = {nome, unidade, preco, categoria, qntmax, qntmin, qnt};
+        Object[] dados = {nome, unidade, preco, categoriaStr, qntmax, qntmin, qnt};
 
       
         tbjproduto.addRow(dados);
-
+        
+        Produto produto = new Produto();
+        int idCategoria = Integer.parseInt(categoriaStr);
+    //Categoria categoria = categoriaService.buscarPorId(idCategoria);
+    //produto.setCategoria(categoria);
+    switch (jvunidade.getSelectedIndex()) {
+        case 0 -> produto.setUnidadeMedida(UnidadeMedida.UNIDADE);
+        case 1 -> produto.setUnidadeMedida(UnidadeMedida.KG);
+        case 2 -> produto.setUnidadeMedida(UnidadeMedida.LITRO);
+        case 3 -> produto.setUnidadeMedida(UnidadeMedida.CAIXA);
+        default -> {
+        }
+    }
+        produto.setNomeProduto(nome);
+        produto.setPreco(preco);
+        produto.setQuantidadeEstoque(qnt);
+        produto.setQuantidadeMaxima(qntmax);
+        produto.setQuantidadeMinima(qntmin);
+        
+        
+        produtoService.cadastrarProduto(produto);
         
         jvnome.setText("");
-        jvunidade.setText("");
+        jvunidade.setSelectedIndex(0);
         jvpreco.setText("");
         jvcategoria.setText("");
         jvmax.setText("");
@@ -311,30 +337,76 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         if(jvproduto.getSelectedRow() != -1){
-        DefaultTableModel tbprodutos = (DefaultTableModel) jvproduto.getModel();
-        tbprodutos.removeRow(jvproduto.getSelectedRow());
+         int linhaSelecionada = jvproduto.getSelectedRow();
+        if(linhaSelecionada != -1){
+            DefaultTableModel tbprodutos = (DefaultTableModel) jvproduto.getModel();
+            Object idObject = tbprodutos.getValueAt(linhaSelecionada, 0);
+            int idInt = Integer.parseInt(String.valueOf(idObject));
+            produtoService.excluirProduto(idInt);
+            tbprodutos.removeRow(jvproduto.getSelectedRow());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(jvproduto.getSelectedRow() != -1){
-            jvproduto.setValueAt(jvnome.getText(), jvproduto.getSelectedRow(), 0);
-            jvproduto.setValueAt(jvunidade.getText(), jvproduto.getSelectedRow(), 1);
-            jvproduto.setValueAt(jvpreco.getText(), jvproduto.getSelectedRow(), 2);
-            jvproduto.setValueAt(jvcategoria.getText(), jvproduto.getSelectedRow(), 3);
-            jvproduto.setValueAt(jvmax.getText(), jvproduto.getSelectedRow(), 4);
-            jvproduto.setValueAt(jvmin.getText(), jvproduto.getSelectedRow(), 5);
-            jvproduto.setValueAt(jquant.getText(), jvproduto.getSelectedRow(), 6);
-        }
+        int linhaSelecionada = jvproduto.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            try {
+                int idProduto = (int) jvproduto.getValueAt(linhaSelecionada, 0);
+
+                String nome = jvnome.getText();
+                String unidadeStr = (String) jvunidade.getSelectedItem();
+                double preco = Double.parseDouble(jvpreco.getText().replace(",", "."));
+                String categoriaNome = jvcategoria.getText();
+                int qntmax = Integer.parseInt(jvmax.getText());
+                int qntmin = Integer.parseInt(jvmin.getText());
+                int qnt = Integer.parseInt(jquant.getText());
+
+                UnidadeMedida unidadeMedida;
+                switch (unidadeStr) {
+                    case "Quilograma":
+                        unidadeMedida = UnidadeMedida.KG;
+                        break;
+                    case "Litro":
+                        unidadeMedida = UnidadeMedida.LITRO;
+                        break;
+                    case "Caixa":
+                        unidadeMedida = UnidadeMedida.CAIXA;
+                        break;
+                    case "Unidade":
+                    default:
+                        unidadeMedida = UnidadeMedida.UNIDADE;
+                        break;
+               }
+                
+                //Categoria categoria = new Categoria();
+                //categoria.setNomeCategoria(categoriaNome);
+
+                Produto produtoAtualizado = new Produto();
+                produtoAtualizado.setIdProduto(idProduto);
+                produtoAtualizado.setNomeProduto(nome);
+                produtoAtualizado.setUnidadeMedida(unidadeMedida);
+                produtoAtualizado.setPreco(preco);
+                //produtoAtualizado.setCategoria(categoria);
+                produtoAtualizado.setQuantidadeMaxima(qntmax);
+                produtoAtualizado.setQuantidadeMinima(qntmin);
+                produtoAtualizado.setQuantidadeEstoque(qnt);
+
+                produtoService.atualizarProduto(produtoAtualizado);
+                
+                 } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, insira valores numéricos válidos para Preço, Quantidade Máxima, Mínima e Estoque. (use ponto para decimal)");
+                        
+                        }
+
+   }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jvprodutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jvprodutoMouseClicked
         // TODO add your handling code here:
         if(jvproduto.getSelectedRow() != -1){
             jvnome.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(), 0).toString());
-            jvunidade.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(), 1).toString());
             jvpreco.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(), 2).toString());
             jvcategoria.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(), 3).toString());
             jvmax.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(), 4).toString());
@@ -342,10 +414,6 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
             jquant.setText(jvproduto.getValueAt(jvproduto.getSelectedRow(),6).toString());
         }
     }//GEN-LAST:event_jvprodutoMouseClicked
-
-    private void jvunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvunidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jvunidadeActionPerformed
 
     private void jvprecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvprecoActionPerformed
         // TODO add your handling code here:
@@ -358,6 +426,10 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
     private void jquantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jquantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jquantActionPerformed
+
+    private void jvunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvunidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jvunidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,6 +477,6 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
     private javax.swing.JTextField jvnome;
     private javax.swing.JTextField jvpreco;
     private javax.swing.JTable jvproduto;
-    private javax.swing.JTextField jvunidade;
+    private javax.swing.JComboBox<String> jvunidade;
     // End of variables declaration//GEN-END:variables
 }
