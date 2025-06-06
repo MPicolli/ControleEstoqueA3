@@ -18,7 +18,7 @@ public class MovimentacaoEstoqueDAO {
     private final Connection conexao;
 
     public MovimentacaoEstoqueDAO() {
-        this.conexao = Conexao.getConnection();
+        this.conexao = ConnectionFactory.getConnection();
     }
 
     public void inserir(MovimentacaoEstoque mov) {
