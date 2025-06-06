@@ -6,7 +6,7 @@ package view;
 
 /**
  *
- * @author Rodrigo
+ * @author Pedro
  */
 public class Telamenu extends javax.swing.JFrame {
 
