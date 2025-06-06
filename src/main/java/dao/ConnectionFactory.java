@@ -5,11 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    private static final String URL = "jdbc:mysql://localhost:3306/controle_estoque";
+    private static final String URL = "jdbc:mysql://localhost:3306/controle_estoque?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
     private static final String SENHA = "123";
 
-    static Connection getConnection() {
+    public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USUARIO, SENHA);
