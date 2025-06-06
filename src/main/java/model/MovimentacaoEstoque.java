@@ -1,11 +1,13 @@
 package model;
 
 public class MovimentacaoEstoque {
+
     private int idMovimentacao;
     private TipoMovimentacao tipoMovimentacao;
     private java.time.LocalDate dataMovimentacao;
     private String observacoes;
     private Produto produto;
+    private int quantidade;
 
     public MovimentacaoEstoque() {
 
@@ -51,6 +53,14 @@ public class MovimentacaoEstoque {
         this.produto = produto;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     @Override
     public String toString() {
         return "MovimentacaoEstoque{" +
@@ -61,4 +71,5 @@ public class MovimentacaoEstoque {
                 ", produto=" + produto +
                 '}';
     }
+
 }
