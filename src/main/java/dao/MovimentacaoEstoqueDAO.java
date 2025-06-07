@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.DatabaseException;
-import model.Categoria;
 import model.MovimentacaoEstoque;
 import model.Produto;
 import model.TipoMovimentacao;
@@ -29,6 +28,7 @@ public class MovimentacaoEstoqueDAO {
             stmt.setString(2, mov.getTipoMovimentacao().toString());
             stmt.setDate(3, java.sql.Date.valueOf(mov.getDataMovimentacao()));
             stmt.setString(4, mov.getObservacoes());
+            stmt.setInt(5, mov.getQuantidade());
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new DatabaseException("Erro ao inserir movimentação: " + e.getMessage());
@@ -53,7 +53,7 @@ public class MovimentacaoEstoqueDAO {
 
                 mov.setDataMovimentacao(rs.getDate("data_movimentacao").toLocalDate());
                 mov.setObservacoes(rs.getString("observacoes"));
-
+                mov.setQuantidade(rs.getInt("quantidade"));
                 lista.add(mov);
             }
         } catch (SQLException e) {

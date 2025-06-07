@@ -69,7 +69,7 @@ public class MovimentacaoEstoque {
                 ", dataMovimentacao=" + dataMovimentacao +
                 ", observacoes='" + observacoes + '\'' +
                 ", produto=" + produto +
+                ", quantidade=" + quantidade +
                 '}';
     }
-
 }
