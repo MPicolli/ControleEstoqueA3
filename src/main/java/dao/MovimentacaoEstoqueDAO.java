@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.DatabaseException;
+import model.Categoria;
 import model.MovimentacaoEstoque;
 import model.Produto;
 import model.TipoMovimentacao;
@@ -60,4 +61,5 @@ public class MovimentacaoEstoqueDAO {
         }
         return lista;
     }
+
 }

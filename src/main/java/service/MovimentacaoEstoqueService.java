@@ -9,6 +9,7 @@ import exception.DadosInvalidosException;
 import exception.EstoqueInsuficienteException;
 import exception.ProdutoNaoEncontradoException;
 import exception.QuantidadeMinimaException;
+import model.Categoria;
 import model.MovimentacaoEstoque;
 import model.Produto;
 import model.TipoMovimentacao;
