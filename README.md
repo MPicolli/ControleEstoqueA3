@@ -50,7 +50,7 @@ O sistema permite o gerenciamento de produtos, categorias, movimentações de en
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/MPicodlli/ControleEstoqueA3.git
+   git clone https://github.com/MPicolli/ControleEstoqueA3.git
    ```
 2. Configure o banco de dados MySQL usando o script fornecido em `/sql/controle_estoque.sql`
 3. Configure o arquivo de conexão com o banco de dados (`ConnectionFactory.java`)
