@@ -256,7 +256,7 @@ public class Telamenu extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Telamovimentação tela8 = new Telamovimentação();
+        Telamovimentacao tela8 = new Telamovimentacao();
         tela8.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed

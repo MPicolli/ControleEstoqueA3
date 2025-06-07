@@ -2,6 +2,7 @@ view\Telamenu$2.class
 view\Telavalorestoque$1.class
 view\Telamenu.class
 exception\EstoqueInsuficienteException.class
+view\Telamovimentação$4.class
 view\Telacadastrocategoria$4.class
 exception\DadosInvalidosException.class
 dao\ConnectionFactory.class
@@ -10,6 +11,7 @@ view\Telamenu$5.class
 view\Telamovimentação.class
 view\Telacadastrocategoria$7.class
 view\Telacadastroproduto$1.class
+view\Telamovimentação$7.class
 view\Telaprodutos.class
 view\Telacadastroproduto$9.class
 view\Telacadastrocategoria$3.class
@@ -20,9 +22,11 @@ view\Telaprodutos$2.class
 view\Telamenu$3.class
 view\TelaCategoria$3.class
 view\Telacadastrocategoria$6.class
+service\CategoriaService.class
 view\Telamenu$6.class
 view\Telamenu$9.class
 dao\MovimentacaoEstoqueDAO.class
+view\Telamovimentação$6.class
 view\Telacadastroproduto$10.class
 exception\ProdutoNaoEncontradoException.class
 view\Telacadastroproduto$3.class
@@ -39,6 +43,7 @@ view\TelaCategoria.class
 view\Telacadastrocategoria$2.class
 view\Telacadastrocategoria$5.class
 view\Telavalorestoque.class
+view\Telamovimentação$5.class
 view\Telacadastroproduto.class
 view\Telamenu$8.class
 view\Telaestoque$1.class

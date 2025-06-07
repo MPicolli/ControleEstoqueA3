@@ -14,7 +14,7 @@ import service.ProdutoService;
  *
  * @author Rodrigo
  */
-public class Telamovimentação extends javax.swing.JFrame {
+public class Telamovimentacao extends javax.swing.JFrame {
     
     private MovimentacaoEstoqueService movimentacaoEstoqueService;
     private ProdutoService produtoService;
@@ -22,7 +22,7 @@ public class Telamovimentação extends javax.swing.JFrame {
     /**
      * Creates new form Telamovimentação
      */
-    public Telamovimentação() {
+    public Telamovimentacao() {
         initComponents();
         movimentacaoEstoqueService = new MovimentacaoEstoqueService();
         produtoService = new ProdutoService();
@@ -267,20 +267,21 @@ public class Telamovimentação extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Telamovimentação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Telamovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Telamovimentação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Telamovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Telamovimentação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Telamovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Telamovimentação.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Telamovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Telamovimentação().setVisible(true);
+                new Telamovimentacao().setVisible(true);
             }
         });
     }
