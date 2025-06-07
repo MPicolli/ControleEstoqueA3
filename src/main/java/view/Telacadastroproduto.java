@@ -10,7 +10,7 @@ import model.Categoria;
 import model.Produto;
 import model.UnidadeMedida;
 import service.ProdutoService;
-//import service.CategoriaService;
+import service.CategoriaService;
 
 /**
  *
@@ -20,13 +20,15 @@ public class Telacadastroproduto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Telacadastroproduto.class.getName());
     private ProdutoService produtoService;
+    private CategoriaService categoriaService;
+    
     /**
      * Creates new form Telacadastroproduto
      */
     public Telacadastroproduto() {
         initComponents();
         produtoService = new ProdutoService(); 
-        
+        categoriaService = new CategoriaService();
     }
 
     /**
@@ -290,16 +292,16 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
         
         Produto produto = new Produto();
         int idCategoria = Integer.parseInt(categoriaStr);
-    //Categoria categoria = categoriaService.buscarPorId(idCategoria);
-    //produto.setCategoria(categoria);
-    switch (jvunidade.getSelectedIndex()) {
-        case 0 -> produto.setUnidadeMedida(UnidadeMedida.UNIDADE);
-        case 1 -> produto.setUnidadeMedida(UnidadeMedida.KG);
-        case 2 -> produto.setUnidadeMedida(UnidadeMedida.LITRO);
-        case 3 -> produto.setUnidadeMedida(UnidadeMedida.CAIXA);
-        default -> {
+        Categoria categoria = categoriaService.buscarCategoriaPorId(idCategoria);
+        produto.setCategoria(categoria);
+        switch (jvunidade.getSelectedIndex()) {
+            case 0 -> produto.setUnidadeMedida(UnidadeMedida.UNIDADE);
+            case 1 -> produto.setUnidadeMedida(UnidadeMedida.KG);
+            case 2 -> produto.setUnidadeMedida(UnidadeMedida.LITRO);
+            case 3 -> produto.setUnidadeMedida(UnidadeMedida.CAIXA);
+            default -> {
+            }
         }
-    }
         produto.setNomeProduto(nome);
         produto.setPreco(preco);
         produto.setQuantidadeEstoque(qnt);
@@ -337,7 +339,7 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         int linhaSelecionada = jvproduto.getSelectedRow();
+        int linhaSelecionada = jvproduto.getSelectedRow();
         if(linhaSelecionada != -1){
             DefaultTableModel tbprodutos = (DefaultTableModel) jvproduto.getModel();
             Object idObject = tbprodutos.getValueAt(linhaSelecionada, 0);
@@ -379,15 +381,15 @@ DefaultTableModel tbjproduto = (DefaultTableModel) jvproduto.getModel();
                         break;
                }
                 
-                //Categoria categoria = new Categoria();
-                //categoria.setNomeCategoria(categoriaNome);
+                Categoria categoria = new Categoria();
+                categoria.setNome(categoriaNome);
 
                 Produto produtoAtualizado = new Produto();
                 produtoAtualizado.setIdProduto(idProduto);
                 produtoAtualizado.setNomeProduto(nome);
                 produtoAtualizado.setUnidadeMedida(unidadeMedida);
                 produtoAtualizado.setPreco(preco);
-                //produtoAtualizado.setCategoria(categoria);
+                produtoAtualizado.setCategoria(categoria);
                 produtoAtualizado.setQuantidadeMaxima(qntmax);
                 produtoAtualizado.setQuantidadeMinima(qntmin);
                 produtoAtualizado.setQuantidadeEstoque(qnt);

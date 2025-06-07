@@ -5,6 +5,9 @@
 package view;
 
 import javax.swing.table.DefaultTableModel;
+import model.TamanhoProduto;
+import model.TipoEmbalagem;
+import service.CategoriaService;
 
 /**
  *
@@ -13,12 +16,15 @@ import javax.swing.table.DefaultTableModel;
 public class Telacadastrocategoria extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Telacadastrocategoria.class.getName());
-
+    
+    private CategoriaService categoriaService;
+            
     /**
      * Creates new form Telacadastrocategoria
      */
     public Telacadastrocategoria() {
         initComponents();
+        categoriaService = new CategoriaService();
     }
 
     /**
@@ -34,10 +40,12 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jvnome = new javax.swing.JTextField();
-        jvtamanho = new javax.swing.JTextField();
-        jvembalagem = new javax.swing.JTextField();
+        jcomboboxtamanho = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jcomboboxembalagem = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jvcategoria = new javax.swing.JTable();
 
@@ -71,58 +79,87 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("ATUALIZAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jvnome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jvnomeActionPerformed(evt);
             }
         });
 
+        jcomboboxtamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
+        jcomboboxtamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboboxtamanhoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome");
+
+        jLabel2.setText("Tamanho");
+
+        jLabel3.setText("Embalagem");
+
+        jcomboboxembalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plástico" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton2)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton1)
+                        .addGap(9, 102, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(145, 145, 145)
+                                .addComponent(jLabel3)
+                                .addGap(24, 24, 24))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jcomboboxtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(jcomboboxembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(54, 54, 54))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jvtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(jvembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
+                        .addGap(111, 111, 111)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(75, 75, 75))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jvtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jvembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jvnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcomboboxtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcomboboxembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3)
+                        .addComponent(jButton2)))
                 .addGap(20, 20, 20))
         );
 
@@ -161,7 +198,7 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,8 +207,32 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel tbjcategoria = (DefaultTableModel) jvcategoria.getModel();
-        Object[] dados = {jvnome.getText(), jvtamanho.getText(),jvembalagem.getText()};
+        Object[] dados = {jvnome.getText(), (String) jcomboboxtamanho.getSelectedItem(), (String) jcomboboxembalagem.getSelectedItem()};
         tbjcategoria.addRow(dados);
+        
+        String nome = jvnome.getText();
+        TamanhoProduto tamanho;
+        switch (jcomboboxtamanho.getSelectedIndex()) {
+            case 0 -> tamanho = TamanhoProduto.PEQUENO;
+            case 1 -> tamanho = TamanhoProduto.MEDIO;
+            case 2 -> tamanho = TamanhoProduto.GRANDE;
+            default -> {tamanho = TamanhoProduto.PEQUENO;
+            }
+        }
+        TipoEmbalagem tipoEmbalagem;
+        switch (jcomboboxembalagem.getSelectedIndex()) {
+            case 0 -> tipoEmbalagem = TipoEmbalagem.LATA;
+            case 1 -> tipoEmbalagem = TipoEmbalagem.VIDRO;
+            case 2 -> tipoEmbalagem = TipoEmbalagem.PLASTICO;
+            default -> {tipoEmbalagem = TipoEmbalagem.LATA;
+            }
+        }
+        
+        categoriaService.salvarCategoria(nome, tamanho, tipoEmbalagem);
+        
+        jvnome.setText("");
+        jcomboboxtamanho.setSelectedIndex(0);
+        jcomboboxembalagem.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -189,15 +250,6 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-         if(jvcategoria.getSelectedRow() != -1){
-            jvcategoria.setValueAt(jvnome.getText(), jvcategoria.getSelectedRow(), 0);
-            jvcategoria.setValueAt(jvtamanho.getText(), jvcategoria.getSelectedRow(), 1);
-            jvcategoria.setValueAt(jvembalagem.getText(), jvcategoria.getSelectedRow(), 2);
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jvnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvnomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jvnomeActionPerformed
@@ -208,12 +260,12 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
 
     private void jvcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jvcategoriaMouseClicked
         // TODO add your handling code here:
-         if(jvcategoria.getSelectedRow() != -1){
-            jvnome.setText(jvcategoria.getValueAt(jvcategoria.getSelectedRow(), 0).toString());
-            jvtamanho.setText(jvcategoria.getValueAt(jvcategoria.getSelectedRow(), 1).toString());
-            jvembalagem.setText(jvcategoria.getValueAt(jvcategoria.getSelectedRow(), 2).toString());
-        }
+         
     }//GEN-LAST:event_jvcategoriaMouseClicked
+
+    private void jcomboboxtamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboboxtamanhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcomboboxtamanhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,12 +296,14 @@ public class Telacadastrocategoria extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcomboboxembalagem;
+    private javax.swing.JComboBox<String> jcomboboxtamanho;
     private javax.swing.JTable jvcategoria;
-    private javax.swing.JTextField jvembalagem;
     private javax.swing.JTextField jvnome;
-    private javax.swing.JTextField jvtamanho;
     // End of variables declaration//GEN-END:variables
 }

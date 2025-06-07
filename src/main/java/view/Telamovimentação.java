@@ -4,17 +4,28 @@
  */
 package view;
 
+import java.time.LocalDate;
+import javax.swing.table.DefaultTableModel;
+import model.TipoMovimentacao;
+import service.MovimentacaoEstoqueService;
+import service.ProdutoService;
+
 /**
  *
  * @author Rodrigo
  */
 public class Telamovimentação extends javax.swing.JFrame {
+    
+    private MovimentacaoEstoqueService movimentacaoEstoqueService;
+    private ProdutoService produtoService;
 
     /**
      * Creates new form Telamovimentação
      */
     public Telamovimentação() {
         initComponents();
+        movimentacaoEstoqueService = new MovimentacaoEstoqueService();
+        produtoService = new ProdutoService();
     }
 
     /**
@@ -29,21 +40,22 @@ public class Telamovimentação extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         botaosair = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfidproduto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jtipo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfquantidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        botaoatualizar = new javax.swing.JButton();
-        botaocadastrarmatheus = new javax.swing.JButton();
+        botaodeletar = new javax.swing.JButton();
+        botaocadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jmovimentação = new javax.swing.JTable();
+        jmovimentacao = new javax.swing.JTable();
 
         jTextField3.setText("jTextField3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Movimentação");
 
         botaosair.setText("VOLTAR");
         botaosair.addActionListener(new java.awt.event.ActionListener() {
@@ -52,9 +64,9 @@ public class Telamovimentação extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfidproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfidprodutoActionPerformed(evt);
             }
         });
 
@@ -71,14 +83,19 @@ public class Telamovimentação extends javax.swing.JFrame {
 
         jLabel4.setText("Quantidade");
 
-        botaoatualizar.setText("ATUALIZAR");
-        botaoatualizar.addActionListener(new java.awt.event.ActionListener() {
+        botaodeletar.setText("DELETE");
+        botaodeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoatualizarActionPerformed(evt);
+                botaodeletarActionPerformed(evt);
             }
         });
 
-        botaocadastrarmatheus.setText("CADASTRAR");
+        botaocadastrar.setText("CADASTRAR");
+        botaocadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaocadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,22 +116,22 @@ public class Telamovimentação extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(85, 85, 85))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(tfidproduto)
                                 .addGap(81, 81, 81)
                                 .addComponent(jtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(70, 70, 70)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(49, 49, 49))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(botaocadastrarmatheus)
+                .addComponent(botaocadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoatualizar)
+                .addComponent(botaodeletar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botaosair))
         );
@@ -124,8 +141,8 @@ public class Telamovimentação extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaosair)
-                    .addComponent(botaoatualizar)
-                    .addComponent(botaocadastrarmatheus))
+                    .addComponent(botaodeletar)
+                    .addComponent(botaocadastrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
@@ -135,13 +152,13 @@ public class Telamovimentação extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfidproduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jmovimentação.setModel(new javax.swing.table.DefaultTableModel(
+        jmovimentacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -157,7 +174,7 @@ public class Telamovimentação extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jmovimentação);
+        jScrollPane1.setViewportView(jmovimentacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,13 +209,46 @@ public class Telamovimentação extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtipoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfidprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfidprodutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfidprodutoActionPerformed
 
-    private void botaoatualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoatualizarActionPerformed
+    private void botaodeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaodeletarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoatualizarActionPerformed
+        int linhaSelecionada = jmovimentacao.getSelectedRow();
+        if(linhaSelecionada != -1){
+            DefaultTableModel tbmovimentacoes = (DefaultTableModel) jmovimentacao.getModel();
+            Object idObject = tbmovimentacoes.getValueAt(linhaSelecionada, 0);
+            int idInt = Integer.parseInt(String.valueOf(idObject));
+            
+            tbmovimentacoes.removeRow(jmovimentacao.getSelectedRow());
+        }
+    }//GEN-LAST:event_botaodeletarActionPerformed
+
+    private void botaocadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaocadastrarActionPerformed
+        // TODO add your handling code here:
+        int idTextField = Integer.parseInt(tfidproduto.getText());
+        TipoMovimentacao tipoMovimentacaoComboBox = jtipo.getSelectedIndex() == 0 ? 
+                TipoMovimentacao.ENTRADA : TipoMovimentacao.SAIDA;
+        int quantidadeTextField = Integer.parseInt(tfquantidade.getText());
+        LocalDate dataAtual = LocalDate.now();
+        
+        if (tipoMovimentacaoComboBox.equals(TipoMovimentacao.ENTRADA)) {
+            movimentacaoEstoqueService.registraEntrada(idTextField, quantidadeTextField, "");
+        } else if (tipoMovimentacaoComboBox.equals(TipoMovimentacao.SAIDA)) {
+            movimentacaoEstoqueService.registrarSaida(idTextField, quantidadeTextField, "");
+        }
+        
+        DefaultTableModel tbjmovimentacao = (DefaultTableModel) jmovimentacao.getModel();
+        Object[] dados = {tfidproduto.getText(), (String) jtipo.getSelectedItem(),tfquantidade.getText()};
+        tbjmovimentacao.addRow(dados);
+        
+        tfidproduto.setText("");
+        tfquantidade.setText("");
+        jtipo.setSelectedIndex(0);
+        
+        
+    }//GEN-LAST:event_botaocadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,8 +286,8 @@ public class Telamovimentação extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoatualizar;
-    private javax.swing.JButton botaocadastrarmatheus;
+    private javax.swing.JButton botaocadastrar;
+    private javax.swing.JButton botaodeletar;
     private javax.swing.JButton botaosair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -245,10 +295,10 @@ public class Telamovimentação extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable jmovimentação;
+    private javax.swing.JTable jmovimentacao;
     private javax.swing.JComboBox<String> jtipo;
+    private javax.swing.JTextField tfidproduto;
+    private javax.swing.JTextField tfquantidade;
     // End of variables declaration//GEN-END:variables
 }
