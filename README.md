@@ -27,7 +27,7 @@ O sistema permite o gerenciamento de produtos, categorias, movimentações de en
 - JDBC
 - MySQL
 - Git e GitHub
-- IDE: IntelliJ IDEA / NetBeans
+- IDE: VSCode / NetBeans
 
 ---
 
@@ -52,8 +52,8 @@ O sistema permite o gerenciamento de produtos, categorias, movimentações de en
    ```bash
    git clone https://github.com/bielntp/controle-estoque-a3-teste.git
    ```
-2. Configure o banco de dados MySQL usando o script fornecido em `/sql/criar_banco.sql`
-3. Configure o arquivo de conexão com o banco de dados (`Conexao.java`)
+2. Configure o banco de dados MySQL usando o script fornecido em `/sql/controle_estoque.sql`
+3. Configure o arquivo de conexão com o banco de dados (`ConnectionFactory.java`)
 4. Compile e execute o projeto em sua IDE preferida
 
 ---
@@ -62,7 +62,7 @@ O sistema permite o gerenciamento de produtos, categorias, movimentações de en
 
 O script SQL completo para criação do banco de dados está localizado na pasta:
 ```
-/sql/db_controle_estoque.sql
+/sql/controle_estoque.sql
 ```
 
 ---
